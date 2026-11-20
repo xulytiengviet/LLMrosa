@@ -1,3 +1,11 @@
+# 🇻🇳 Tài liệu và trang Việt hóa ROSA / ROS 2 / Gazebo
+
+- [Mở trang học và mô phỏng trên GitHub Pages](https://xulytiengviet.github.io/LLMrosa/) — cần bật **Settings → Pages → Deploy from branch → main /(root)** nếu chưa kích hoạt.
+- [Đọc hướng dẫn tiếng Việt](README.vi.md) — mô phỏng trình duyệt, công cụ ROSA, cách chạy ví dụ ZHAW Summit XL, nguyên tắc an toàn.
+- **Phân biệt:** giao diện HTML là bài học mô phỏng 2D độc lập, **không** điều khiển ROS 2 hoặc robot thật. Mã mô phỏng Summit XL của ZHAW là repository khác: [RAP-2025-Project-Group-2](https://github.com/RAP-2025-Project-Group-2/RAP-2025-Project-Group-2).
+
+---
+
 <!-- Header block for project --> <hr>
 <div align="center">
 <!--   <img width="292" alt="ROSA_logo_dark_bg@2x" src="https://github.com/user-attachments/assets/7b4a8e64-9a08-4180-806a-5076d3672c05"> -->
