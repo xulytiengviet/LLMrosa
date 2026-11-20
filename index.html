@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071428">
+  <meta name="description" content="LLMrosa Việt hóa: học điều khiển robot bằng ngôn ngữ tự nhiên với NASA JPL ROSA, ROS 2, Nav2, SLAM và Gazebo. Mô phỏng 2D tương tác miễn phí trên trình duyệt.">
+  <title>LLMrosa Việt hóa | AI + ROS 2 + Gazebo</title>
+  <style>
+    :root{color-scheme:dark;--bg:#081224;--bg2:#0e2039;--panel:#101e33;--panel2:#142740;--edge:#2a3d58;--muted:#9cb3ce;--text:#ebf3ff;--aqua:#53e0d0;--blue:#85a9ff;--orange:#ffba7a;--danger:#ff8597;--radius:18px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0,#123353 0,transparent 32%),radial-gradient(circle at 85% 8%,#182448 0,transparent 25%),var(--bg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
+    a{color:var(--aqua);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+    .shell{width:min(1180px,calc(100% - 38px));margin:auto}.skip{position:absolute;left:-9999px;top:8px}.skip:focus{left:10px;background:#fff;color:#111;z-index:99;padding:8px}
+    header{position:sticky;top:0;z-index:20;background:#081427ed;border-bottom:1px solid #31415b;backdrop-filter:blur(12px)}.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px;font-weight:800;letter-spacing:-.6px}.logo{display:inline-grid;place-items:center;width:36px;height:36px;border:1px solid #58dbc8;border-radius:12px;color:var(--aqua);font-size:20px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.7px;line-height:1}.navlinks{display:flex;align-items:center;gap:22px;font-size:14px}.navlinks a{color:#c9d9eb}.navlinks .pill{color:#091727;background:var(--aqua);padding:8px 15px;border-radius:40px;font-weight:750}
+    .hero{padding:74px 0 60px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px}.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #42627c;background:#14283d;padding:5px 13px;border-radius:60px;color:var(--aqua);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}.pulse{width:8px;height:8px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 4px #53e0d01a}
+    h1{font-size:clamp(38px,5.5vw,70px);line-height:1.1;letter-spacing:-2.8px;margin:20px 0}h1 span{color:var(--aqua)}.lead{font-size:19px;max-width:620px;color:#bfd0e8}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;border:1px solid #54677e;padding:11px 19px;font-weight:750;font-size:14px;background:#15273f;color:#e7f2ff}.btn:hover{background:#213c5b;text-decoration:none}.btn.primary{background:var(--aqua);color:#06212c;border-color:var(--aqua)}.btn.primary:hover{background:#80f0df}.micro{color:var(--muted);font-size:13px}
+    .hero-card{background:linear-gradient(155deg,#162e4c,#0b1b31);border:1px solid #2d4d6d;border-radius:24px;padding:26px;box-shadow:0 30px 80px #0005}.hero-card-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:1px}.dotlights{display:flex;gap:5px}.dotlights i{width:9px;height:9px;background:#66819e;border-radius:50%}.dotlights i:first-child{background:var(--danger)}.dotlights i:nth-child(2){background:var(--orange)}.dotlights i:last-child{background:var(--aqua)}.bubble{display:inline-block;padding:12px 16px;border-radius:14px 14px 4px 14px;background:#224166;margin:28px 0 22px 48px;font-weight:650}.hero-flow{display:flex;flex-direction:column;align-items:center;gap:8px}.flow-node{width:100%;border:1px solid #3b5b76;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#102841}.flow-node b{font-size:14px}.flow-node span{color:var(--muted);font-size:12px}.flow-node:last-child{border-color:#2c9f96;background:#0e373e}.flow-arrow{color:var(--aqua);line-height:1}
+    .section{padding:53px 0;scroll-margin-top:80px}.sec-head{margin-bottom:25px}.kicker{color:var(--aqua);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.section h2{font-size:clamp(27px,3.2vw,39px);letter-spacing:-1px;line-height:1.2;margin:8px 0 10px}.section p.sub{color:var(--muted);max-width:800px;margin:0}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{background:linear-gradient(155deg,#12253b,#0e1c30);padding:24px;border:1px solid var(--edge);border-radius:var(--radius)}.feature .num{width:44px;height:44px;display:grid;place-items:center;background:#1b3a53;color:var(--aqua);border:1px solid #326077;border-radius:13px;font-size:22px}.feature h3{margin:15px 0 5px;font-size:20px}.feature p{margin:0;color:var(--muted);font-size:14px}
+    .pipeline{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:25px 0}.pipe{min-width:0;text-align:center;padding:18px 7px;border-radius:12px;border:1px solid #35516d;background:#14263f}.pipe strong{display:block;font-size:13px}.pipe small{display:block;color:var(--muted);font-size:11px;line-height:1.35;margin-top:7px}.pipe:nth-child(4){border-color:#3abbab;background:#123b43}.notice{border-left:3px solid var(--aqua);background:#102b3c;border-radius:0 10px 10px 0;padding:15px 18px;color:#cfdfef;font-size:14px}.notice.warn{border-color:var(--orange);background:#382b25}
+    .lab{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(315px,.9fr);gap:18px;align-items:stretch}.panel{border:1px solid var(--edge);border-radius:var(--radius);background:var(--panel);overflow:hidden}.panel-head{padding:17px 20px;border-bottom:1px solid var(--edge);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-head h3{margin:0;font-size:16px}.tag{display:inline-flex;gap:7px;align-items:center;border-radius:50px;background:#143b43;color:#85eadd;padding:5px 10px;font-size:11px;font-weight:700}.map-wrap{padding:13px;background:#0a182b}.map-svg{width:100%;display:block;background:#0a1a2c;border-radius:10px;aspect-ratio:16/11}.map-legend{display:flex;gap:14px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--edge);font-size:12px;color:var(--muted)}.legend-mark{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--edge);border-top:1px solid var(--edge)}.stat{background:#12233a;padding:13px 16px}.stat b{display:block;font-size:16px;font-variant-numeric:tabular-nums}.stat small{color:var(--muted);font-size:11px}
+    .control{display:flex;flex-direction:column}.control-body{padding:20px;display:flex;flex-direction:column;gap:15px;flex:1}.control label{font-size:13px;font-weight:750}.command-form{display:flex;flex-direction:column;gap:9px}.command-form input{width:100%;padding:12px 14px;border:1px solid #466480;border-radius:10px;background:#08172a;color:#fff}.hint{font-size:12px;color:var(--muted)}.chipset{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:7px 10px;background:#182e48;border:1px solid #3a536f;color:#dceaff;border-radius:9px;font-size:12px}.chip:hover{background:#2a4a66}.control-actions{display:flex;gap:8px}.control-actions .btn{flex:1}.btn.stop{color:#ffd3d9;border-color:#a34c5a;background:#442532}.terminal{background:#071322;border:1px solid #233e5d;border-radius:12px;padding:15px;flex:1;min-height:170px}.terminal-label{color:#86d4cc;text-transform:uppercase;font-size:11px;letter-spacing:1.4px;font-weight:750}.term-list{margin:9px 0 0;max-height:180px;overflow:auto;padding:0;list-style:none;font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;color:#c5d7e8}.term-list li{border-bottom:1px solid #173046;padding:5px 0;overflow-wrap:anywhere}.term-list li:last-child{border-bottom:none}.term-time{color:#718fb1}.term-good{color:var(--aqua)}.term-bad{color:var(--danger)}.statusline{font-size:12px;color:#b4c8dd;min-height:20px}
+    .table-wrap{overflow-x:auto;border:1px solid var(--edge);border-radius:14px;background:#0e1d31}table{border-collapse:collapse;width:100%;text-align:left}th,td{padding:13px 16px;border-bottom:1px solid var(--edge);vertical-align:top;font-size:13px}tr:last-child td{border-bottom:0}th{color:var(--aqua);background:#142941;font-size:12px}td:first-child{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#ecf4ff;white-space:nowrap}td:nth-child(2){color:#bfcee2}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}.step{border:1px solid var(--edge);border-radius:14px;background:#102137;padding:19px;margin-bottom:12px}.step .n{display:inline-grid;place-items:center;background:var(--aqua);color:#06202a;border-radius:50%;width:26px;height:26px;font-size:13px;font-weight:800;margin-right:8px}.step strong{font-size:16px}.step p{color:var(--muted);font-size:13px;margin:8px 0}.codebox{margin-top:12px;background:#071321;border:1px solid #2a435a;border-radius:10px;overflow:hidden}.codebar{display:flex;justify-content:space-between;align-items:center;background:#10273d;border-bottom:1px solid #284258;padding:7px 12px;color:#a3bdd5;font-size:11px}.copy{border:1px solid #45657c;border-radius:6px;background:#1a3951;color:#d5e9ef;padding:3px 9px;font-size:11px}.codebox pre{margin:0;overflow-x:auto;padding:15px;color:#a9f3d9;font-size:12px;line-height:1.7}.side-note{border:1px solid #376177;background:#123147;border-radius:14px;padding:21px}.side-note h3{margin:0 0 8px}.side-note p{color:#b7cade;font-size:14px}
+    .sources{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.source{border:1px solid var(--edge);padding:20px;border-radius:14px;background:#12253a}.source h3{font-size:16px;margin:0 0 7px}.source p{margin:0 0 13px;color:var(--muted);font-size:13px}.source a{font-size:13px}.footer{padding:30px 0 50px;border-top:1px solid var(--edge);color:#8ca6bf;font-size:13px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:990px){.hero{gap:26px}.pipeline{grid-template-columns:repeat(4,1fr)}.lab{grid-template-columns:1fr}.control-body{min-height:0}.term-list{max-height:145px}}@media(max-width:740px){.navlinks{gap:12px}.navlinks a:not(.pill){display:none}.hero{grid-template-columns:1fr;padding:44px 0}.hero-card{max-width:560px}.grid3,.sources,.split{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,1fr)}h1{letter-spacing:-1.5px}.section{padding:37px 0}.shell{width:min(1180px,calc(100% - 28px))}th,td{padding:10px;font-size:12px}.hero-card{padding:19px}.map-legend{gap:8px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Đi đến nội dung chính</a>
+  <header><div class="shell nav">
+    <a class="brand" href="#dau" aria-label="LLMrosa về đầu trang"><span class="logo">⌘</span><span>LLMrosa<small>VIETNAMESE ROBOTICS LAB</small></span></a>
+    <nav class="navlinks" aria-label="Điều hướng chính"><a href="#kien-truc">Kiến trúc</a><a href="#mo-phong">Mô phỏng</a><a href="#huong-dan">Cài đặt</a><a href="#tai-lieu">Tài liệu</a><a class="pill" href="https://github.com/xulytiengviet/LLMrosa" target="_blank" rel="noopener noreferrer">Mã nguồn ↗</a></nav>
+  </div></header>
+  <main id="main">
+    <section class="shell hero" id="dau">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> AI · Embodied AI · ROS 2 · Gazebo</div>
+        <h1>Nói tiếng Việt.<br><span>Robot tự tìm đường.</span></h1>
+        <p class="lead">Khám phá cách mô hình ngôn ngữ lớn (LLM) hiểu yêu cầu, ROSA lựa chọn công cụ, còn ROS 2 và Nav2 thực hiện chuyển động. Học bằng tiếng Việt, thử ngay trên trình duyệt.</p>
+        <div class="actions"><a class="btn primary" href="#mo-phong">▶ Trải nghiệm mô phỏng</a><a class="btn" href="#huong-dan">Xem hướng dẫn ROS 2</a></div>
+        <div class="micro">Trang giáo dục mã nguồn mở • Mô phỏng 2D chạy cục bộ • Không yêu cầu API key</div>
+      </div>
+      <div class="hero-card" aria-label="Minh họa luồng lệnh">
+        <div class="hero-card-top"><span>ROBOT CONTROL / COMMAND PIPELINE</span><span class="dotlights"><i></i><i></i><i></i></span></div>
+        <div class="bubble">“Hãy đi đến nhà bếp.”</div>
+        <div class="hero-flow">
+          <div class="flow-node"><b>🧠 LLM + ROSA</b><span>Nhận dạng ý định / chọn công cụ</span></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><b>🛡️ Bộ kiểm tra an toàn</b><span>Danh sách lệnh cho phép</span></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><b>🧭 ROS 2 + Nav2</b><span>Định vị / lập đường đi</span></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><b>🤖 Gazebo / Robot</b><span>Thi hành + phản hồi trạng thái</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="shell section" id="kien-truc">
+      <div class="sec-head"><div class="kicker">01 / Kiến trúc hệ thống</div><h2>LLM hiểu ngôn ngữ. ROS điều khiển robot.</h2><p class="sub">Tách tầng hiểu lệnh khỏi tầng điều khiển thời gian thực; không gửi văn bản LLM trực tiếp đến cơ cấu chấp hành.</p></div>
+      <div class="grid3">
+        <article class="feature"><div class="num">🧠</div><h3>Ngôn ngữ tự nhiên</h3><p>Claude hoặc LLM được cấu hình phân tích yêu cầu. ROSA dựa trên LangChain để tìm và gọi công cụ ROS hợp lệ.</p></article>
+        <article class="feature"><div class="num">🧭</div><h3>Điều hướng tự hành</h3><p>Nav2 nhận đích, lập kế hoạch và tránh vật cản. SLAM xây dựng bản đồ; RViz hiển thị trạng thái và bản đồ.</p></article>
+        <article class="feature"><div class="num">🦾</div><h3>Mô phỏng / thực thi</h3><p>Gazebo mô phỏng robot Summit XL trong môi trường nhà; cùng tư duy có thể mở rộng sang robot thật sau khi kiểm định.</p></article>
+      </div>
+      <div class="pipeline" role="list" aria-label="Bảy giai đoạn xử lý">
+        <div class="pipe" role="listitem"><strong>① Tiếng Việt</strong><small>“Đi đến nhà bếp”</small></div>
+        <div class="pipe" role="listitem"><strong>② LLM</strong><small>Hiểu yêu cầu</small></div>
+        <div class="pipe" role="listitem"><strong>③ ROSA</strong><small>Chọn công cụ</small></div>
+        <div class="pipe" role="listitem"><strong>④ Safety Gate</strong><small>Kiểm tra trước chạy*</small></div>
+        <div class="pipe" role="listitem"><strong>⑤ ROS 2</strong><small>Node / Action</small></div>
+        <div class="pipe" role="listitem"><strong>⑥ Nav2 / SLAM</strong><small>Đường đi / bản đồ</small></div>
+        <div class="pipe" role="listitem"><strong>⑦ Gazebo</strong><small>Robot di chuyển</small></div>
+      </div>
+      <div class="notice">* Safety Gate là <strong>lớp bảo vệ đề xuất cho bản Việt hóa</strong>, không phải cam kết rằng mã nguồn ROSA hoặc ví dụ ZHAW đã tích hợp sẵn. Trong mô phỏng bên dưới, bộ kiểm tra an toàn hoạt động theo luật xác định, không sử dụng LLM thật.</div>
+    </section>
+    <section class="shell section" id="mo-phong">
+      <div class="sec-head"><div class="kicker">02 / Phòng thí nghiệm tương tác</div><h2>Ra lệnh cho robot bằng tiếng Việt</h2><p class="sub">Mô phỏng mặt bằng 2D độc lập với ROS 2/Gazebo. Hệ thống ánh xạ câu lệnh theo quy tắc, duyệt danh sách hành động được phép và tìm đường tránh ô bị chặn bằng A*.</p></div>
+      <div class="lab">
+        <section class="panel" aria-label="Bản đồ mô phỏng">
+          <div class="panel-head"><h3>Bản đồ trong nhà · bản mô phỏng 2D</h3><span class="tag">● OFFLINE DEMO</span></div>
+          <div class="map-wrap"><svg id="world" class="map-svg" viewBox="0 0 800 550" role="img" aria-label="Bản đồ ô lưới có năm phòng, vật cản và robot di chuyển theo đường A sao"></svg></div>
+          <div class="map-legend"><span><i class="legend-mark" style="background:#67ead5"></i>Robot</span><span><i class="legend-mark" style="background:#7a9cff"></i>Đường đã tính</span><span><i class="legend-mark" style="background:#38536b"></i>Vật cản</span><span><i class="legend-mark" style="background:#ffb46d"></i>Đích</span></div>
+          <div class="stats"><div class="stat"><b id="position">7, 9</b><small>Ô tọa độ robot (x, y)</small></div><div class="stat"><b id="steps">0</b><small>Số bước mô phỏng</small></div><div class="stat"><b id="mode">Sẵn sàng</b><small>Trạng thái</small></div></div>
+        </section>
+        <section class="panel control" aria-label="Bảng lệnh điều khiển mô phỏng">
+          <div class="panel-head"><h3>Trạm lệnh tiếng Việt</h3><span class="tag">🛡 Kiểm tra lệnh</span></div>
+          <div class="control-body">
+            <form class="command-form" id="command-form"><label for="command">Nhập yêu cầu</label><input id="command" autocomplete="off" maxlength="180" value="Hãy đi đến nhà bếp" placeholder="Ví dụ: Đi đến phòng ngủ" required><button class="btn primary" type="submit">▶ Phân tích & thực thi</button></form>
+            <div><label>Thử lệnh mẫu</label><div class="chipset" style="margin-top:8px"><button class="chip" type="button" data-command="Đi đến nhà bếp">Nhà bếp</button><button class="chip" type="button" data-command="Đi đến phòng khách">Phòng khách</button><button class="chip" type="button" data-command="Đi đến phòng ngủ">Phòng ngủ</button><button class="chip" type="button" data-command="Đi đến văn phòng">Văn phòng</button><button class="chip" type="button" data-command="Đi đến phòng tập">Phòng tập</button><button class="chip" type="button" data-command="Lùi lại 1,5 mét">Lùi 1,5 m</button><button class="chip" type="button" data-command="Khám phá bản đồ">Khám phá</button><button class="chip" type="button" data-command="Lưu bản đồ">Lưu bản đồ</button></div></div>
+            <div class="control-actions"><button id="stop" class="btn stop" type="button">■ Dừng ngay</button><button id="reset" class="btn" type="button">↺ Đặt lại</button></div>
+            <div class="terminal"><div class="terminal-label">Nhật ký công cụ · ROSA-inspired</div><ul id="log" class="term-list" aria-live="polite" aria-relevant="additions"></ul></div>
+            <div id="status" class="statusline" role="status" aria-live="polite">Sẵn sàng thử nghiệm; không kết nối robot thật.</div>
+          </div>
+        </section>
+      </div>
+      <p class="micro" style="margin-top:13px">Giới hạn: vị trí phòng và vật cản là dữ liệu minh họa; ô lưới 0,5 m, hướng mặc định là Bắc. Không có cảm biến, SLAM, Gazebo, mô hình LLM hay ROS 2 thật chạy trong trình duyệt.</p>
+    </section>
+    <section class="shell section" id="cong-cu">
+      <div class="sec-head"><div class="kicker">03 / Bộ công cụ ROSA</div><h2>Từ một câu nói đến một hàm Python</h2><p class="sub">Danh mục công cụ trong ví dụ ROSA Summit của nhóm ZHAW. Chữ ký và hành vi cụ thể được định nghĩa trong mã nguồn ví dụ, không phải API mặc định của mọi bản ROSA.</p></div>
+      <div class="table-wrap"><table><thead><tr><th>Công cụ</th><th>Chức năng</th><th>Ví dụ tiếng Việt</th></tr></thead><tbody>
+        <tr><td>send_vel</td><td>Gửi vận tốc tiến</td><td>Tiến với vận tốc 0,2 m/s</td></tr>
+        <tr><td>stop</td><td>Dừng robot</td><td>Dừng lại ngay</td></tr>
+        <tr><td>toggle_auto_exploration</td><td>Bật / tắt khám phá tự động</td><td>Khám phá toàn bộ bản đồ</td></tr>
+        <tr><td>navigate_to_pose</td><td>Đi đến tọa độ tuyệt đối</td><td>Đến vị trí x=1, y=2</td></tr>
+        <tr><td>navigate_relative</td><td>Di chuyển tương đối</td><td>Lùi lại 1,5 mét</td></tr>
+        <tr><td>save_map</td><td>Lưu bản đồ do SLAM tạo</td><td>Lưu bản đồ thành nha_01</td></tr>
+        <tr><td>list_saved_maps</td><td>Liệt kê bản đồ đã lưu</td><td>Liệt kê các bản đồ</td></tr>
+        <tr><td>get_location_names</td><td>Liệt kê địa điểm đã định nghĩa</td><td>Có những phòng nào?</td></tr>
+        <tr><td>navigate_to_location_by_name</td><td>Đi đến một phòng theo tên</td><td>Hãy đi đến nhà bếp</td></tr>
+      </tbody></table></div>
+    </section>
+    <section class="shell section" id="huong-dan">
+      <div class="sec-head"><div class="kicker">04 / Hướng dẫn chạy ROS 2 thật</div><h2>Từ website đến Gazebo, Nav2 và ROSA</h2><p class="sub">Trang này là phần Việt hóa và mô phỏng trên web. Để chạy robot Summit XL thực tế trong Gazebo, dùng mã nguồn bài thực hành ZHAW ở repository riêng.</p></div>
+      <div class="split">
+        <div>
+          <div class="step"><div><span class="n">1</span><strong>Chuẩn bị môi trường tương thích</strong></div><p>Hướng dẫn Summit dùng ROS 2 Jazzy trong môi trường container chuyên dụng (ví dụ robopaas/rap-jazzy:cuda12.5.0), Gazebo, Nav2 và bản đồ nhà. Ubuntu 24.04 + ROS 2 Jazzy là hướng triển khai phù hợp; cần kiểm tra tương thích GPU và image.</p></div>
+          <div class="step"><div><span class="n">2</span><strong>Lấy mã nguồn mô phỏng Summit</strong></div><p>Clone ví dụ ZHAW vào workspace trong container đã chuẩn bị. Script init.sh của họ có thao tác cài phụ thuộc và build workspace; nên đọc script trước khi chạy.</p><div class="codebox"><div class="codebar"><span>Terminal</span><button class="copy" type="button" data-copy="git clone https://github.com/RAP-2025-Project-Group-2/RAP-2025-Project-Group-2.git ~/rap/Gruppe2">Sao chép</button></div><pre>git clone https://github.com/RAP-2025-Project-Group-2/RAP-2025-Project-Group-2.git ~/rap/Gruppe2</pre></div><div class="codebox"><div class="codebar"><span>Trong container đã chuẩn bị</span><button class="copy" type="button" data-copy="source ~/rap/Gruppe2/init.sh">Sao chép</button></div><pre>source ~/rap/Gruppe2/init.sh</pre></div></div>
+          <div class="step"><div><span class="n">3</span><strong>Khởi chạy Gazebo + Nav2</strong></div><p>Chọn bản đồ có sẵn để điều hướng hoặc bật chế độ SLAM khi cần khám phá.</p><div class="codebox"><div class="codebar"><span>Điều hướng bằng bản đồ sẵn có</span><button class="copy" type="button" data-copy="ros2 launch rosa_summit summit.launch.py">Sao chép</button></div><pre>ros2 launch rosa_summit summit.launch.py</pre></div><div class="codebox"><div class="codebar"><span>Chế độ SLAM</span><button class="copy" type="button" data-copy="ros2 launch rosa_summit summit.launch.py slam:=True">Sao chép</button></div><pre>ros2 launch rosa_summit summit.launch.py slam:=True</pre></div></div>
+          <div class="step"><div><span class="n">4</span><strong>Khởi chạy ROSA và gửi lệnh</strong></div><p>Trong terminal mới cùng workspace, thiết lập thông tin LLM bằng biến môi trường phía máy chủ (không đưa key vào website, ảnh Docker công khai hay Git).</p><div class="codebox"><div class="codebar"><span>Chạy agent</span><button class="copy" type="button" data-copy="ros2 run rosa_summit rosa_summit">Sao chép</button></div><pre>ros2 run rosa_summit rosa_summit</pre></div><p>Ví dụ tương tác: “take me to the kitchen”. Lệnh tiếng Việt cần được kiểm thử với LLM và phần chuẩn hóa tên phòng; không bảo đảm mọi cấu hình agent hiểu tiếng Việt nguyên bản.</p></div>
+        </div>
+        <div>
+          <div class="side-note"><h3>🛡 Nguyên tắc an toàn</h3><p>LLM không nên được quyền xuất lệnh trực tiếp đến động cơ. Chỉ công bố các công cụ đã kiểm tra, giới hạn tốc độ và khoảng cách, ràng buộc vùng hoạt động, theo dõi timeout và có dừng khẩn cấp độc lập.</p><p>Đối với robot vật lý, cần kiểm tra cảm biến, tình trạng định vị, mục tiêu có hợp lệ, con người trong vùng nguy hiểm và cơ chế phục hồi lỗi. Mô phỏng tốt không đồng nghĩa đủ an toàn để triển khai.</p></div>
+          <div class="side-note" style="margin-top:16px"><h3>🇻🇳 Hướng Việt hóa mở rộng</h3><p>Chuẩn hóa câu tiếng Việt → ý định có kiểu → đối chiếu danh sách công cụ → kiểm tra điều kiện → gọi ROS 2 Action. Có thể thêm CVNSS4.0 như lớp biểu diễn/hậu kiểm tiếng Việt, nhưng đây là hướng phát triển tương lai, không phải thành phần vốn có của NASA ROSA.</p><div class="codebox"><div class="codebar"><span>Ví dụ Task IR có kiểu (minh họa)</span></div><pre>{
+  "intent": "navigate_to_location",
+  "location": "kitchen",
+  "confirmed": true,
+  "mode": "simulation"
+}</pre></div></div>
+          <div class="side-note" style="margin-top:16px"><h3>🔐 Không đưa API key lên GitHub</h3><p>GitHub Pages chỉ phục vụ giao diện tĩnh. Không nhúng khóa Anthropic/OpenAI vào HTML, JavaScript hoặc .env được commit. Muốn kết nối ROS thật phải xây backend có xác thực, kiểm soát quyền, log và lớp an toàn riêng.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="shell section" id="tai-lieu">
+      <div class="sec-head"><div class="kicker">05 / Tài liệu kiểm chứng</div><h2>Nghiên cứu và mã nguồn tham khảo</h2><p class="sub">Phân biệt rõ thư viện nền NASA JPL, bài thực hành ZHAW và trang trình diễn tiếng Việt của LLMrosa.</p></div>
+      <div class="sources">
+        <article class="source"><h3>NASA JPL · ROSA</h3><p>Framework Robot Operating System Agent; công cụ ROS/ROS 2 và tài liệu xây dựng agent.</p><a href="https://github.com/nasa-jpl/rosa" target="_blank" rel="noopener noreferrer">GitHub ROSA ↗</a></article>
+        <article class="source"><h3>ZHAW · ROSA Summit</h3><p>Ứng dụng ROSA điều khiển robot Summit XL với ROS 2, Nav2, Gazebo và bản đồ nhà.</p><a href="https://github.com/RAP-2025-Project-Group-2/RAP-2025-Project-Group-2" target="_blank" rel="noopener noreferrer">Mã nguồn Summit ↗</a></article>
+        <article class="source"><h3>Mike Likes Robots</h3><p>Bài viết hướng dẫn thực hành điều khiển robot bằng LLM, giải thích cách triển khai ví dụ.</p><a href="https://mikelikesrobots.github.io/blog/llm-robot-control/" target="_blank" rel="noopener noreferrer">Xem hướng dẫn gốc ↗</a></article>
+      </div>
+      <div class="notice warn" style="margin-top:18px">Lưu ý nguồn gốc: repository LLMrosa đang dựa trên ROSA (Apache-2.0). Mã thực hành Summit của ZHAW là dự án riêng. Website này chỉ mô phỏng điều hướng 2D nhằm giảng dạy và không khẳng định đã vận hành được robot thật.</div>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell footer-inner"><div><strong>LLMrosa · Vietnamese Robotics Lab</strong><br>Trang Việt hóa và mô phỏng độc lập phục vụ học tập.</div><div>Tham khảo <a href="https://github.com/nasa-jpl/rosa">ROSA</a> · <a href="https://github.com/RAP-2025-Project-Group-2/RAP-2025-Project-Group-2">ROSA Summit</a> · <a href="https://github.com/xulytiengviet/LLMrosa">Repository</a></div></div></footer>
+  <script>
+    (function(){
+      "use strict";
+      var NS="http://www.w3.org/2000/svg",W=16,H=11,S=50;
+      var svg=document.getElementById("world"),logs=document.getElementById("log"),status=document.getElementById("status");
+      var positionEl=document.getElementById("position"),stepEl=document.getElementById("steps"),modeEl=document.getElementById("mode");
+      var places=[
+        {id:"gym",label:"PHÒNG TẬP",x:3,y:2,aliases:["phong tap","gym"]},
+        {id:"kitchen",label:"NHÀ BẾP",x:13,y:2,aliases:["nha bep","bep","kitchen"]},
+        {id:"living room",label:"PHÒNG KHÁCH",x:7,y:5,aliases:["phong khach","living room"]},
+        {id:"office",label:"VĂN PHÒNG",x:12,y:8,aliases:["van phong","phong lam viec","office"]},
+        {id:"bedroom",label:"PHÒNG NGỦ",x:3,y:9,aliases:["phong ngu","bedroom"]}
+      ];
+      var walls=new Set();
+      for(var y=1;y<=8;y++){if(y!==4&&y!==7)walls.add("5,"+y)}
+      for(var y2=1;y2<=9;y2++){if(y2!==5&&y2!==8)walls.add("10,"+y2)}
+      for(var x=1;x<=4;x++){if(x!==3)walls.add(x+",6")}
+      for(var x2=11;x2<=14;x2++){if(x2!==12)walls.add(x2+",3")}
+      var start={x:7,y:9},robot={x:7,y:9},route=[],travelled=0,timer=null,goal=null,exploreTargets=[];
+      var key=function(p){return p.x+","+p.y};
+      var norm=function(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/\s+/g," ").trim()};
+      function cellOpen(x,y){return x>=0&&y>=0&&x<W&&y<H&&!walls.has(x+","+y)}
+      function el(tag,attributes,text){var a=document.createElementNS(NS,tag);Object.keys(attributes||{}).forEach(function(k){a.setAttribute(k,String(attributes[k]))});if(text!==undefined)a.textContent=text;return a}
+      function add(tag,a,t){var node=el(tag,a,t);svg.appendChild(node);return node}
+      function log(message,kind){var li=document.createElement("li"),stamp=document.createElement("span"),msg=document.createElement("span");stamp.className="term-time";stamp.textContent="["+new Date().toLocaleTimeString("vi-VN",{hour12:false})+"] ";msg.className=kind==="bad"?"term-bad":kind==="good"?"term-good":"";msg.textContent=message;li.append(stamp,msg);logs.prepend(li);while(logs.children.length>18)logs.lastChild.remove()}
+      function state(text){status.textContent=text;modeEl.textContent=text.length>17?text.slice(0,17)+"…":text}
+      function draw(){
+        svg.replaceChildren();add("rect",{x:0,y:0,width:800,height:550,fill:"#091c2e"});
+        for(var yy=0;yy<H;yy++)for(var xx=0;xx<W;xx++){
+          var blocked=walls.has(xx+","+yy);
+          add("rect",{x:xx*S+1,y:yy*S+1,width:S-2,height:S-2,rx:3,fill:blocked?"#355068":(xx+yy)%2?"#112a40":"#142f47"});
+        }
+        places.forEach(function(p){
+          add("circle",{cx:p.x*S+25,cy:p.y*S+25,r:19,fill:"#244a60",stroke:"#64a7b9","stroke-width":1.5,"stroke-dasharray":"3 3"});
+          var ty=p.y<3?p.y*S-4:p.y*S+60;
+          add("text",{x:p.x*S+25,y:ty,"font-size":12,"font-weight":700,"text-anchor":"middle",fill:"#b8cfe3"},p.label);
+        });
+        if(route.length){
+          var nodes=[robot].concat(route),points=nodes.map(function(p){return (p.x*S+25)+","+(p.y*S+25)}).join(" ");
+          add("polyline",{points:points,fill:"none",stroke:"#87acff","stroke-width":5,"stroke-linejoin":"round","stroke-linecap":"round","stroke-dasharray":"10 8",opacity:0.88});
+        }
+        if(goal)add("circle",{cx:goal.x*S+25,cy:goal.y*S+25,r:12,fill:"#ffba7a",stroke:"#ffebc3","stroke-width":3});
+        add("circle",{cx:robot.x*S+25,cy:robot.y*S+25,r:17,fill:"#53e0d0",stroke:"#eafffc","stroke-width":3});
+        add("circle",{cx:robot.x*S+25,cy:robot.y*S+25,r:5,fill:"#123744"});
+        add("path",{d:"M "+(robot.x*S+25)+" "+(robot.y*S+7)+" l -6 9 h 12 z",fill:"#073441"});
+        positionEl.textContent=key(robot);stepEl.textContent=String(travelled);
+      }
+      function aStar(a,b){
+        if(!cellOpen(b.x,b.y))return null;
+        var queue=[{x:a.x,y:a.y,g:0,f:0}],cost=new Map([[key(a),0]]),parent=new Map(),closed=new Set();
+        while(queue.length){
+          queue.sort(function(i,j){return i.f-j.f});
+          var cur=queue.shift(),k=key(cur);
+          if(closed.has(k))continue;
+          if(k===key(b)){var out=[];while(k!==key(a)){var parts=k.split(",");out.unshift({x:Number(parts[0]),y:Number(parts[1])});k=parent.get(k)}return out}
+          closed.add(k);
+          [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+            var nx=cur.x+d[0],ny=cur.y+d[1],nk=nx+","+ny,ng=cur.g+1;
+            if(!cellOpen(nx,ny)||closed.has(nk)||ng>60)return;
+            if(!cost.has(nk)||ng<cost.get(nk)){cost.set(nk,ng);parent.set(nk,k);queue.push({x:nx,y:ny,g:ng,f:ng+Math.abs(nx-b.x)+Math.abs(ny-b.y)})}
+          });
+        }
+        return null;
+      }
+      function stop(silent){
+        if(timer!==null){clearInterval(timer);timer=null}
+        route=[];goal=null;exploreTargets=[];draw();
+        if(!silent){state("Đã dừng");log("stop() → đã hủy chuyển động mô phỏng","good")}
+      }
+      function moveTo(target,tool){
+        stop(true);
+        var path=aStar(robot,target);
+        if(path===null){state("Bị chặn");log("Safety Gate: không tìm thấy đường hợp lệ","bad");return}
+        if(path.length>50){state("Từ chối");log("Safety Gate: tuyến dài vượt giới hạn 50 ô","bad");return}
+        goal={x:target.x,y:target.y};route=path;
+        log("✓ Safety Gate → cho phép "+tool,"good");
+        if(!route.length){state("Đã đến đích");log("Robot đã ở tại vị trí đích","good");goal=null;draw();return}
+        state("Đang di chuyển");draw();
+        timer=setInterval(function(){
+          if(!route.length){clearInterval(timer);timer=null;goal=null;state("Đã đến đích");log("Nav2 (mô phỏng) → đạt mục tiêu","good");draw();return}
+          var next=route.shift();
+          if(!cellOpen(next.x,next.y)){stop(true);state("Dừng an toàn");log("Safety Gate: ô tiếp theo bị chặn","bad");return}
+          robot={x:next.x,y:next.y};travelled++;
+          draw();
+        },230);
+      }
+      function activateExplore(){
+        stop(true);exploreTargets=[places[0],places[2],places[1],places[3],places[4]];
+        log("toggle_auto_exploration(true) → quét waypoint giả lập","good");
+        function next(){if(!exploreTargets.length){state("Khám phá xong");log("Kết thúc quét 5 điểm mẫu (không phải SLAM)","good");return}
+          var p=exploreTargets.shift(),path=aStar(robot,p);if(path===null){log("Bỏ qua "+p.id+" vì đường bị chặn","bad");next();return}
+          route=path;goal=p;state("Đang khám phá");draw();
+          timer=setInterval(function(){if(!route.length){clearInterval(timer);timer=null;log("Đã ghé "+p.label,"good");next();return}robot=route.shift();travelled++;draw()},150)
+        }
+        next();
+      }
+      function command(raw){
+        var s=norm(raw);if(!s){state("Thiếu lệnh");return}
+        log("Người dùng → "+raw);
+        if(/\b(dung|ngung|stop)\b/.test(s)){stop(false);return}
+        if(/(liet ke|danh sach|co nhung phong|ban do da luu)/.test(s)){
+          if(s.includes("ban do"))log("list_saved_maps() → chưa có bản đồ lưu trong phiên này","good");
+          else log("get_location_names() → gym, kitchen, living room, office, bedroom","good");
+          state("Đã truy vấn");return
+        }
+        if(/luu ban do/.test(s)){log("save_map('ban_do_demo') → minh họa; không ghi tệp trên máy","good");state("Đã minh họa lưu");return}
+        if(/kham pha|explor/.test(s)){activateExplore();return}
+        var room=places.find(function(p){return p.aliases.some(function(alias){return s.includes(alias)})});
+        if(room){log("ROSA → navigate_to_location_by_name('"+room.id+"')");moveTo(room,"navigate_to_location_by_name");return}
+        var match=s.match(/\b(lui|tien)\b.*?(\d+(?:[.,]\d+)?)\s*(m|met)\b/);
+        if(match){
+          var metres=Number(match[2].replace(",","."));if(!Number.isFinite(metres)||metres<=0||metres>5){state("Từ chối");log("Safety Gate: khoảng cách phải lớn hơn 0 và tối đa 5 m","bad");return}
+          var dy=(match[1]==="lui"?1:-1)*Math.round(metres*2),point={x:robot.x,y:robot.y+dy};
+          if(!cellOpen(point.x,point.y)){state("Từ chối");log("Safety Gate: đích nằm ngoài bản đồ hoặc trong vật cản","bad");return}
+          log("ROSA → navigate_relative(0, "+(-dy/2)+" m) [đơn giản hóa]");
+          moveTo(point,"navigate_relative");return
+        }
+        state("Lệnh không hợp lệ");log("Safety Gate: từ chối lệnh ngoài danh sách cho phép","bad");
+      }
+      document.getElementById("command-form").addEventListener("submit",function(ev){ev.preventDefault();command(document.getElementById("command").value)});
+      document.querySelectorAll("[data-command]").forEach(function(b){b.addEventListener("click",function(){document.getElementById("command").value=b.dataset.command;command(b.dataset.command)})});
+      document.getElementById("stop").addEventListener("click",function(){stop(false)});
+      document.getElementById("reset").addEventListener("click",function(){stop(true);robot={x:start.x,y:start.y};travelled=0;state("Sẵn sàng");log("Đặt lại trạng thái mô phỏng","good");draw()});
+      document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",async function(){try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="Đã sao chép";setTimeout(function(){b.textContent="Sao chép"},1200)}catch(e){b.textContent="Không sao chép được"}})});
+      draw();log("Mô phỏng 2D khởi tạo: không kết nối ROS 2, LLM hoặc robot thật","good");
+    })();
+  </script>
+</body>
+</html>
